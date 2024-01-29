@@ -38,9 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val pokemonUseCases = PokemonUseCases() // Provide your actual implementation here
-
-        viewModel = ViewModelProvider(this, PokemonViewModelFactory(pokemonUseCases))
+        viewModel = ViewModelProvider(this, PokemonViewModelFactory())
             .get(PokemonViewModel::class.java)
 
         botaoPesquisaPoke = findViewById<Button>(R.id.pesquisa)
