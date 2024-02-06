@@ -1,8 +1,8 @@
-package com.example.pokedex.usecase
+package com.example.pokedex.domain.usecase
 
 import android.util.Log
-import com.example.pokedex.model.Pokemon
-import com.example.pokedex.repository.PokeRepositoryImpl
+import com.example.pokedex.domain.model.Pokemon
+import com.example.pokedex.data.repository.PokeRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch

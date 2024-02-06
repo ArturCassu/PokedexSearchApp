@@ -1,6 +1,6 @@
 package com.example.pokedex.util
 
-import com.example.pokedex.api.PokeApi
+import com.example.pokedex.data.api.PokeApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create

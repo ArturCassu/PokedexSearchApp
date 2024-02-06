@@ -1,4 +1,4 @@
-package com.example.pokedex
+package com.example.pokedex.presentation
 
 
 import com.example.pokedex.viewmodel.PokemonViewModelFactory
@@ -9,11 +9,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.pokedex.model.Pokemon
-import com.example.pokedex.usecase.PokemonUseCases
+import com.example.pokedex.R
+import com.example.pokedex.domain.model.Pokemon
 import com.example.pokedex.viewmodel.PokemonViewModel
 import kotlin.random.Random
 

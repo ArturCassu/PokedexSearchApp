@@ -2,7 +2,7 @@ package com.example.pokedex.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.pokedex.usecase.PokemonUseCases
+import com.example.pokedex.domain.usecase.PokemonUseCases
 
 class PokemonViewModelFactory() : ViewModelProvider.Factory {
 
