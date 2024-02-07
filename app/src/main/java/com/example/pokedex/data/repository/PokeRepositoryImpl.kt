@@ -1,14 +1,14 @@
 package com.example.pokedex.data.repository
 
+import com.example.pokedex.data.api.PokeApi
 import com.example.pokedex.domain.model.Pokemon
 import com.example.pokedex.util.RetrofitClient
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class PokeRepositoryImpl: PokeRepository {
+class PokeRepositoryImpl(private val api:PokeApi): PokeRepository {
 
     override suspend fun getPokemonById(id:String): Flow<Pokemon> = flow {
-        val api = RetrofitClient.getService()
         val response = api.getPokemon(id)
         val pokemon = Pokemon(
             id = response.id,

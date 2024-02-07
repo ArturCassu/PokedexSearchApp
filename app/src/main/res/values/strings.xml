@@ -5,4 +5,5 @@
     <string name="reset">Resetar</string>
     <string name="pesquisar">Pesquisar</string>
     <string name="TextBoxPlaceholder">Digite o nome ou número na pokedex</string>
+    <string name="pokeball_icon_description">Pokeball Icon</string>
 </resources>

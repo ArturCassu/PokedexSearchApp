@@ -12,11 +12,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
+import com.example.pokedex.databinding.ActivityMainBinding
 import com.example.pokedex.domain.model.Pokemon
 import com.example.pokedex.viewmodel.PokemonViewModel
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+abstract class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     private val numberOfPokemon = 1025
 
@@ -27,34 +30,33 @@ class MainActivity : AppCompatActivity() {
     private lateinit var botaoResetPoke: Button
     private lateinit var pokemonInput: EditText
 
-    private lateinit var pokeName: TextView
-    private lateinit var pokeId: TextView
-    private lateinit var pokeType1: TextView
-    private lateinit var pokeType2: TextView
-    private lateinit var pokeImage: ImageView
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         viewModel = ViewModelProvider(this, PokemonViewModelFactory())
             .get(PokemonViewModel::class.java)
 
-        botaoPesquisaPoke = findViewById<Button>(R.id.pesquisa)
-        botaoAleatorioPoke = findViewById<Button>(R.id.aleatorio)
-        botaoResetPoke = findViewById<Button>(R.id.reset)
-        pokemonInput = findViewById<EditText>(R.id.pokemonInput)
+        botaoPesquisaPoke = binding.pesquisa
+        botaoAleatorioPoke = binding.aleatorio
+        botaoResetPoke = binding.reset
+        pokemonInput = binding.pokemonInput
 
-
-        pokeName = findViewById<TextView>(R.id.pokeName)
-        pokeId = findViewById<TextView>(R.id.pokeId)
-        pokeType1 = findViewById<TextView>(R.id.pokeType1)
-        pokeType2 = findViewById<TextView>(R.id.pokeType2)
-        pokeImage = findViewById(R.id.pokeImage);
+        val pokeName = binding.pokeName
+        val pokeId = binding.pokeId
+        val pokeImage = binding.pokeImage;
 
 
         viewModel.pokemonLiveData.observe(this, Observer {
-            dataChange(it)
+
+            pokeName.text = it.nome
+            pokeId.text = it.nome
+
+
+
+            Glide.with(this).load(it.spriteDefault).into(pokeImage);
+
         })
 
         getPokemon()
@@ -77,37 +79,5 @@ class MainActivity : AppCompatActivity() {
         botaoResetPoke.setOnClickListener {
             viewModel.pokemonLiveData.value = Pokemon("","","",emptyList())
         }
-    }
-
-    private fun dataChange(pokemon: Pokemon){
-        pokeName.text = pokemon.nome.replaceFirstChar { it.uppercase() }
-
-        when (pokemon.id) {
-            "????" -> {
-                val id = "N° ${pokemon.id}"
-                pokeId.text = id
-            }
-            "" -> {
-                pokeId.text = ""
-            }
-            else -> {
-                val id = "N° ${String.format("%04d", pokemon.id.toInt())}"
-                pokeId.text = id
-            }
-        }
-
-
-
-        pokeType1.text = ""
-        pokeType2.text = ""
-        if (pokemon.types.isNotEmpty()){
-            for(i in 0..<pokemon.types.size){
-                when(i){
-                    0 -> {pokeType1.text = pokemon.types[i].replaceFirstChar { it.uppercase() } }
-                    1 -> {pokeType2.text = pokemon.types[i].replaceFirstChar { it.uppercase() }}
-                }
-            }
-        }
-        Glide.with(this).load(pokemon.spriteDefault).into(pokeImage);
     }
 }
