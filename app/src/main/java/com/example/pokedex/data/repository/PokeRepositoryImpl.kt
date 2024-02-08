@@ -1,5 +1,6 @@
 package com.example.pokedex.data.repository
 
+import android.util.Log
 import com.example.pokedex.data.api.PokeApi
 import com.example.pokedex.domain.model.Pokemon
 import com.example.pokedex.util.RetrofitClient

@@ -9,7 +9,7 @@ class RetrofitClient {
 
 
     companion object{
-        private val baseUrl = "https://pokeapi.co/api/v2/"
+        private const val baseUrl = "https://pokeapi.co/api/v2/"
         fun getService(): PokeApi {
             return Retrofit.Builder()
                 .baseUrl(baseUrl)

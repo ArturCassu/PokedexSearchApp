@@ -6,18 +6,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
 import com.example.pokedex.databinding.ActivityMainBinding
 import com.example.pokedex.domain.model.Pokemon
+import com.example.pokedex.presentation.adapter.CustomAdapter
+import com.example.pokedex.presentation.adapter.PokeTypeAdapter
 import com.example.pokedex.viewmodel.PokemonViewModel
 import kotlin.random.Random
 
-abstract class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -46,14 +47,21 @@ abstract class MainActivity : AppCompatActivity() {
         val pokeName = binding.pokeName
         val pokeId = binding.pokeId
         val pokeImage = binding.pokeImage;
+        val pokeTypes = binding.pokeTypes
 
 
         viewModel.pokemonLiveData.observe(this, Observer {
 
             pokeName.text = it.nome
-            pokeId.text = it.nome
+            pokeId.text = it.id
 
+            val dataset = arrayOf("January", "February", "March")
+            val customAdapter = CustomAdapter(dataset)
 
+            val recyclerView: RecyclerView = findViewById(R.id.pokeTypes)
+            recyclerView.adapter = customAdapter
+
+//            pokeTypes.adapter = PokeTypeAdapter(it.types)
 
             Glide.with(this).load(it.spriteDefault).into(pokeImage);
 
