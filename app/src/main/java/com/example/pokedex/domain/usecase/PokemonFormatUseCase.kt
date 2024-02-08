@@ -31,7 +31,7 @@ class PokemonFormatUseCase {
         val returnTypes: MutableList<String> = emptyList<String>().toMutableList()
         try {
             if (pokemon.types.isNotEmpty()){
-                for(i in 0..<pokemon.types.size-1){
+                for(i in 0..<pokemon.types.size){
                     returnTypes.add( pokemon.types[i].replaceFirstChar { it.uppercase() } )
                 }
             }
