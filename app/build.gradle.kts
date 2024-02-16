@@ -65,4 +65,9 @@ dependencies {
     //Coroutines
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+
+    //Mockk
+    testImplementation ("io.mockk:mockk-android:1.13.9")
+    testImplementation ("io.mockk:mockk-agent:1.13.9")
 }
