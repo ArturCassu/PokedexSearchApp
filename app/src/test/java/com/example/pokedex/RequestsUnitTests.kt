@@ -31,9 +31,6 @@ import org.junit.Assert.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class RequestsUnitTests {
-
-
-
     @Test
     fun `PokeRepositoryImpl getPokemon retorna um objeto do tipo pokemon`() = runBlocking {
         val pokemon = Pokemon(
@@ -52,22 +49,4 @@ class RequestsUnitTests {
 
         assertEquals(PokeRepositoryImpl(api).getPokemonById("1").first(), pokemon)
     }
-
-
-
-//    @Test
-//    suspend fun `PokeUseCases getPokemon chama PokeRepositoryImpl getPokemon`() {
-//        val api: PokeApi = mockk()
-//
-//        val spiedClass = spyk(PokemonRequestUseCase(api))
-//
-//        coEvery { PokeRepositoryImpl(api).getPokemonById(any()) } returns (flow { emit(mockk()) })
-//        spiedClass.getPokemonById("1", {})
-//
-//        verify(exactly = 1) { spiedClass.getPokemonById(any(),{}) }
-//
-//    }
-
-
-
 }
