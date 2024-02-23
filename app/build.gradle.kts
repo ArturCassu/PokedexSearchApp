@@ -57,7 +57,7 @@ dependencies {
     //Retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation ("com.google.code.gson:gson:2.8.9")
+    implementation ("com.google.code.gson:gson:2.10")
 
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
@@ -70,4 +70,9 @@ dependencies {
     //Mockk
     testImplementation ("io.mockk:mockk-android:1.13.9")
     testImplementation ("io.mockk:mockk-agent:1.13.9")
+
+    //Koin
+//    implementation ("io.insert-koin:koin-core:3.4.1")
+//    implementation ("io.insert-koin:koin-androidx-viewmodel:3.4.1")
+    implementation ("io.insert-koin:koin-android:3.4.1")
 }

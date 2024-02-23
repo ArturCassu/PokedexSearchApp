@@ -9,21 +9,12 @@ import com.example.pokedex.domain.model.PokemonResponse
 import com.example.pokedex.domain.model.Sprites
 import com.example.pokedex.domain.model.Type
 import com.example.pokedex.domain.model.TypeName
-import com.example.pokedex.domain.usecase.PokemonRequestUseCase
-import io.mockk.InternalPlatformDsl.toArray
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.mockk
-import io.mockk.spyk
-import io.mockk.verify
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
