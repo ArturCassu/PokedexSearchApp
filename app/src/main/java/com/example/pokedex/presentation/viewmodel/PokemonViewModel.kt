@@ -11,9 +11,8 @@ class PokemonViewModel(private val pokemonRequestUseCase: PokemonRequestUseCase,
 
     fun getPokemonById(id:String){
 
-        pokemonRequestUseCase.getPokemonById(id){ response ->
-            pokemonLiveData.value = pokemonFormatUseCase.pokemonFormat(response)
-        }
+        val response = pokemonRequestUseCase.getPokemonById(id)
+        pokemonLiveData.value = response?.let { pokemonFormatUseCase.pokemonFormat(it) }
 
     }
 
