@@ -12,9 +12,9 @@ import com.example.pokedex.domain.model.TypeName
 import com.example.pokedex.domain.usecase.PokemonFormatUseCase
 import com.example.pokedex.domain.usecase.PokemonRequestUseCase
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -26,7 +26,7 @@ import org.junit.Test
  */
 class RequestsUnitTests {
     @Test
-    fun `PokeRepositoryImpl getPokemon retorna um objeto do tipo pokemon`() = runBlocking {
+    fun `PokeRepositoryImpl getPokemon teste (Teste unitário)`() = runBlocking {
         val pokemon = Pokemon(
             id = "1",
             nome = "bulbasaur",
@@ -45,13 +45,20 @@ class RequestsUnitTests {
         assertEquals(pokemon, PokeRepositoryImpl(api).getPokemonById("1").first())
     }
     @Test
-    fun `PokemonViewModel retorna um objeto de pokemon formatado`() = runBlocking {
+    fun `PokemonRequestUseCase caminho completo para req e PokemonFormatUseCase (Teste Integrado)`() = runBlocking {
         val pokemonFormatado = Pokemon(
             id = "N° 0001",
             nome = "Bulbasaur",
             spriteDefault = "",
             types = (listOf("Grass","Poison"))
         )
+        val pokemon = Pokemon(
+            id = "1",
+            nome = "bulbasaur",
+            spriteDefault = "",
+            types = (listOf("grass","poison"))
+        )
+
         val api: PokeApi = mockk()
 
         coEvery { api.getPokemon("1") } coAnswers { PokemonResponse(
@@ -61,11 +68,14 @@ class RequestsUnitTests {
             types = listOf(Type(TypeName("grass")),Type(TypeName("poison")))
         ) }
 
-        val reqUsecase: PokemonRequestUseCase = mockk()
-        every { reqUsecase.getPokemonById("1") } returns PokeRepositoryImpl(api).getPokemonById("1").first()
+//        val reqUsecase: PokemonRequestUseCase = mockk()
+//        every { reqUsecase.getPokemonById("1") } returns PokeRepositoryImpl(api).getPokemonById("1").first()
+
+        val reqUsecase = PokemonRequestUseCase ( PokeRepositoryImpl ( api ) )
 
         val retorno1 = reqUsecase.getPokemonById("1")
-        val retorno2 = retorno1?.let { PokemonFormatUseCase().pokemonFormat(it) }
+        assertEquals(pokemon, retorno1.single())
+        val retorno2 = retorno1.let { PokemonFormatUseCase().pokemonFormat(it.single()) }
         assertEquals(pokemonFormatado, retorno2)
     }
 }
